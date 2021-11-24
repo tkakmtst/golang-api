@@ -1,6 +1,0 @@
-TZ=Asia/Tokyo
-MYSQL_DATABASE=golangapi_db
-MYSQL_USER=username
-MYSQL_PASSWORD=password
-MYSQL_ALLOW_EMPTY_PASSWORD=yes
-MYSQL_ROOT_PASSWORD: password

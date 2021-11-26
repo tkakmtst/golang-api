@@ -1,11 +1,15 @@
 package main
 
 import (
-	"fmt"
+    "github.com/gin-gonic/gin"
 )
 
 func main() {
-	fmt.Println("Good Morning!")
-	fmt.Println("Good Afternoon!")
-	fmt.Println("Good Evening!")
+    r := gin.Default()
+    r.GET("/", hoge)
+    r.Run() // デフォルトが8080ポートなので今回は変更しません
+}
+
+func hoge(c *gin.Context) {
+    c.JSON(200, "hogeeeeeeee")
 }

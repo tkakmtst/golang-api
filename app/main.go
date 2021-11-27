@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"net/http"
 )
 
 func main() {
-	fmt.Println("Good Morning!")
-	fmt.Println("Good Afternoon!")
-	fmt.Println("Good Evening!")
+	http.Handle("/", http.FileServer(http.Dir("./assets")))
+
+	http.ListenAndServe(":8080", nil)
 }

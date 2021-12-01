@@ -1,10 +1,29 @@
 version: '3'
 services:
+  mysql:
+    build: ./docker/mysql/
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      TZ: 'Asia/Tokyo'
+    env_file: ./docker/mysql/.env
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    command: mysqld
+    ports:
+      - 3306:3306
   app:
     container_name: app
-    build: .
+    build: ./docker/app/
+    depends_on:
+      - mysql
     tty: true
     volumes:
       - .:/go/src
     ports:
       - "8080:8080"
+volumes:
+  mysql-data:
+    driver: local

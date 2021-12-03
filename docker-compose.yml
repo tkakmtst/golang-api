@@ -12,9 +12,9 @@ services:
     command: mysqld
     ports:
       - 3306:3306
-  app:
-    container_name: app
-    build: ./docker/app/
+  api:
+    build: ./docker/api/
+    container_name: api
     depends_on:
       - mysql
     tty: true
@@ -22,6 +22,17 @@ services:
       - .:/go/src
     ports:
       - "8080:8080"
+  front:
+    build: ./docker/front/
+    container_name: front
+    volumes:
+      - .:/user/src/front
+    command: sh -c "cd app && yarn start"
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
+
 volumes:
   mysql-data:
     driver: local

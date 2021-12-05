@@ -1,38 +1,38 @@
 version: '3'
 services:
-  mysql:
-    build: ./docker/mysql/
-    container_name: mysql
-    env_file: ./docker/mysql/.env
-    environment:
-      TZ: 'Asia/Tokyo'
-    volumes:
-      - mysql-data:/var/lib/mysql
-      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-    command: mysqld
-    ports:
-      - 3306:3306
-  api:
-    build: ./docker/api/
-    container_name: api
-    depends_on:
-      - mysql
-    tty: true
-    volumes:
-      - .:/go/src
-    ports:
-      - "8080:8080"
+  # mysql:
+  #   build: ./docker/mysql/
+  #   container_name: mysql
+  #   env_file: ./docker/mysql/.env
+  #   environment:
+  #     TZ: 'Asia/Tokyo'
+  #   volumes:
+  #     - mysql-data:/var/lib/mysql
+  #     - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+  #   command: mysqld
+  #   ports:
+  #     - 3306:3306
+  # api:
+  #   build: ./docker/api/
+  #   container_name: api
+  #   depends_on:
+  #     - mysql
+  #   tty: true
+  #   volumes:
+  #     - .:/go/src
+  #   ports:
+  #     - "8080:8080"
   front:
     build: ./docker/front/
     container_name: front
     volumes:
-      - .:/user/src/front
-    command: sh -c "cd app && yarn start"
+      - ./front:/user/src/front
+    command: yarn start
     ports:
       - 3000:3000
-    depends_on:
-      - api
+    # depends_on:
+    #   - api
 
-volumes:
-  mysql-data:
-    driver: local
+# volumes:
+#   mysql-data:
+#     driver: local

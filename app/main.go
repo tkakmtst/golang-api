@@ -1,7 +1,10 @@
 package main
 
 import (
+	"database/sql"
 	"net/http"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
